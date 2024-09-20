@@ -7,106 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Maile123のBlog</title>
     <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Text:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        /* 通用样式 */
-        body {
-            font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #F5F5F7;
-            color: #1d1d1f;
-            line-height: 1.6;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            font-weight: 600;
-            margin: 0;
-        }
-
-        p {
-            margin: 1rem 0;
-        }
-
-        /* 页头样式 */
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            background-color: white;
-            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            color: #0071e3;
-        }
-
-        header p {
-            font-size: 1.2rem;
-            color: #6e6e73;
-        }
-
-        nav a {
-            margin: 0 15px;
-            font-size: 1rem;
-            color: #0071e3;
-            text-decoration: none;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        /* 文章区域样式 */
-        .container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #1d1d1f;
-        }
-
-        .post-meta {
-            font-size: 0.9rem;
-            color: #6e6e73;
-            margin-bottom: 20px;
-        }
-
-        .post-meta span {
-            margin-right: 15px;
-        }
-
-        .content img {
-            max-width: 100%;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-
-        /* 页脚样式 */
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            background-color: white;
-            color: #6e6e73;
-            margin-top: 40px;
-            border-top: 1px solid #d1d1d6;
-        }
-
-        footer p {
-            margin: 0;
-        }
-    </style>
+    <link rel="stylesheet" href="paper.css">
 </head>
 
 <body>
@@ -124,25 +25,58 @@
 
     <!-- 主要内容 -->
     <div class="container">
-        <h2>苹果风格的设计理念</h2>
+        <img src="makoEat.jpg" alt="图片" class="post-image" width="50" height="50">
         <div class="post-meta">
             <span>作者: Maile123</span>
             <span>发布日期: 2024年9月18日</span>
+            <h2>线段树</h2>
         </div>
 
         <div class="content">
-            <p>苹果的设计风格以其简约、高效和用户友好而著称。无论是他们的产品还是软件界面，都体现了这些设计原则。今天，我将分享如何通过简洁的排版、清晰的层次结构和合适的留白来模仿这种风格。</p>
+            <p>线段树是算法竞赛中常用的用来维护区间信息的数据结构。线段树可以在 O(log N) 的时间复杂度内实现单点修改、区间修改、区间查询等操作。</p>
 
-            <img src="apple-style.jpg" alt="苹果风格示例图片">
-
-            <h3>简洁的排版</h3>
-            <p>苹果的字体设计一直以清晰和现代感为核心。使用苹果自己的 <strong>SF Pro</strong> 字体或类似的干净字体，保持每个段落简短，避免冗长的文字段落。</p>
-
-            <h3>视觉层次结构</h3>
-            <p>通过使用大小不同的标题（如 <strong>h1, h2, h3</strong>）以及颜色和粗细的变化，可以创造出明显的视觉层次，让读者更容易理解内容结构。</p>
-
-            <h3>留白</h3>
-            <p>苹果风格非常强调留白的使用。通过适当的空白和边距，可以让页面看起来更加简洁和不拥挤，这也能让用户的阅读体验更加舒适。</p>
+            <h3>代码实现</h3>
+            <pre class="apple-code-block">
+                <code>
+                    #include<iostream>
+                    #include<algorithm>
+                    #include<string.h>
+                    #include<queue>
+                    #include<vector>
+                    using namespace std;
+                    using ll = long long;
+                    const int N = 2e5 + 9;
+                    ll a[N];
+                    int n,m;
+                    ll t[N << 2]; 
+                    ll lz[N << 2]; 
+                    void pushup(int o) { t[o]=t[o << 1] + t[o << 1 | 1]; }
+                    void buildTree(int s=1, int e=n, int o=1) {
+                        if (s==e) { t[o]=a[s]; return; }
+                        int mid=(s + e)>> 1;
+                        buildTree(s, mid, o << 1);
+                        buildTree(mid + 1, e, o << 1 | 1);
+                        pushup(o); 
+                    }
+                    // More code...
+                    int main() { 
+                        cin >> n >> m; 
+                        for (int i = 1; i <= n; i++) cin >> a[i];
+                        buildTree(); 
+                        while (m--) {
+                            int op; cin >> op;
+                            if (op == 1) {
+                                int x, y, k; cin >> x >> y >> k;
+                                add(x, y, k);
+                            }
+                            if (op == 2) {
+                                int x, y; cin >> x >> y;
+                                cout << query(x, y) << '\n'; 
+                            } 
+                        } 
+                    }
+                </code>
+            </pre>
         </div>
     </div>
 
