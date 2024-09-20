@@ -1,0 +1,36 @@
+/* 技术栈样式 */
+#technology {
+    margin-top: 40px;
+}
+
+#technology h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #0071e3;
+}
+
+#technology p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.tech-stack {
+    list-style-type: none;
+    padding-left: 0;
+    font-size: 18px;
+}
+
+.tech-stack li {
+    padding: 10px 0;
+    border-bottom: 1px solid #e5e5ea;
+}
+
+.tech-stack li:last-child {
+    border-bottom: none;
+}
+
+.tech-title {
+    font-weight: bold;
+    color: #007aff;
+}

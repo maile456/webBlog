@@ -1,0 +1,56 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f0f0f5;
+}
+
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    /* White background for loader */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.loading-text {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+    /* Space between text and progress bar */
+}
+
+.progress-container {
+    width: 80%;
+    max-width: 600px;
+    background-color: #e0e0e0;
+    /* Light grey background for progress bar */
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    /* Space between progress bar and GIF */
+}
+
+.progress-bar {
+    height: 20px;
+    background-color: #007aff;
+    /* Apple blue color */
+    width: 0%;
+    transition: width 0.3s ease;
+    border-radius: 20px;
+}
+
+.gif-animation {
+    width: 500px;
+    height: 500px;
+}

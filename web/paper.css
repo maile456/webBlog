@@ -1,0 +1,43 @@
+/* 博客文章区域样式 */
+.posts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.post-card {
+    flex: 1 1 calc(50% - 20px);
+    /* 每行两个卡片，减去间距 */
+    max-width: calc(50% - 20px);
+    /* 每行两个卡片，减去间距 */
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-sizing: border-box;
+    text-decoration: none;
+    /* 去掉链接下划线 */
+}
+
+.post-card h3 {
+    font-size: 1.5rem;
+    margin-top: 0;
+}
+
+.post-card p {
+    margin: 10px 0 0;
+}
+
+.post-card:hover {
+    text-decoration: none;
+    /* 悬停时仍去掉下划线 */
+}
+
+/* 让每行卡片适应容器宽度，并为不同屏幕设置不同的宽度 */
+@media (max-width: 768px) {
+    .post-card {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}

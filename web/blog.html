@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>maile123のblog</title>
+  <link href="blog.css" rel="stylesheet">
+  <link href="paper.css" rel="stylesheet">
+  <link href="technology.css" rel = "stylesheet">
+  <link href="comments.css" rel = "stylesheet">
+  <link href="projects.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- 页头 -->
+  <header>
+    <h1>欢迎来到我的博客</h1>
+    <p>分享技术、生活与思考</p>
+    <nav>
+      <a href="#about">关于我</a>
+      <a href="#blog">博客文章</a>
+      <a href="#projects">项目/作品集</a>
+      <a href="#technology">个人技术栈</a>
+      <a href="#comments">留言</a>
+    </nav>
+  </header>
+
+  <!-- 横向滚动容器 -->
+  <div class="slider">
+        <!-- 关于我 -->
+        <section id="about">
+          <div class="container">
+            <h2>关于我</h2>
+            <div class="about">
+              <img src="./mako.jpg" alt="我的头像">
+              <p>你好，我是maile123，一名热爱编程的开发者，专注于Web开发和技术分享。</p>
+              <p>联系方式: <a href="#">911464719@qq.com</a></p>
+            </div>
+          </div>
+        </section>
+
+    <!-- 博客文章 -->
+<section id="blog">
+  <div class="container">
+    <h2>博客文章</h2>
+    <div class="posts">
+      <a href="paper.html" class="post-card">
+        <h3>HTML、CSS 和 JavaScript 入门指南</h3>
+        <p>对于初学者，学习前端开发是一个很好的起点。在这篇文章中，我将介绍如何入门。</p>
+      </a>
+
+
+      <a href="paper.html" class="post-card">
+        <h3>使用React开发单页应用</h3>
+        <p>React是一个非常流行的前端框架，它简化了Web应用程序的开发。今天我将分享如何开始使用它。</p>
+      </a>
+
+
+
+    </div>
+  </div>
+</section>
+    
+<!-- 项目/作品集 -->
+<section id="projects">
+  <div class="container">
+    <h2>项目/作品集</h2>
+    <div class="projects">
+      <!-- 项目 1 -->
+      <div class="project-card">
+        <img src="makoEat.jpg" alt="项目 1 图片" class="project-image">
+        <h3>待开发项目1</h3>
+        <p>项目描述：这是我完成的一个Web开发项目，主要使用React和Node.js。</p>
+        <p><strong>技术栈：</strong>React, Node.js, MongoDB</p>
+        <a href="https://github.com/your-project1" class="project-link" target="_blank">查看项目</a>
+      </div>
+
+      <!-- 项目 2 -->
+      <div class="project-card">
+        <img src="makoEat.jpg" alt="项目 2 图片" class="project-image">
+        <h3>待开发项目2</h3>
+        <p>项目描述：这个项目是一个使用Vue.js开发的单页应用，集成了RESTful API。</p>
+        <p><strong>技术栈：</strong>Vue.js, Express, MySQL</p>
+        <a href="https://github.com/your-project2" class="project-link" target="_blank">查看项目</a>
+      </div>
+
+      <!-- 添加更多项目 -->
+    </div>
+  </div>
+</section>
+
+    
+<!-- 个人技术栈-->
+<section id="technology">
+  <div class="container">
+    <h2>个人技术栈</h2>
+    <p>以下是我擅长的技术领域，涵盖前端、后端及 DevOps 等多个方面。</p>
+    <ul class="tech-stack">
+      <li><span class="tech-title">前端开发：</span>HTML5, CSS3, JavaScript (ES6+), React, Vue.js</li>
+      <li><span class="tech-title">后端开发：</span>Node.js, Express, Python, Django</li>
+      <li><span class="tech-title">数据库：</span>MongoDB, MySQL, PostgreSQL</li>
+      <li><span class="tech-title">版本控制：</span>Git, GitHub, GitLab</li>
+      <li><span class="tech-title">容器化技术：</span>Docker, Kubernetes</li>
+      <li><span class="tech-title">其他工具：</span>Webpack, Babel, Sass</li>
+      <!-- 你可以继续添加更多的技术项 -->
+    </ul>
+  </div>
+</section>
+
+
+
+        
+<!-- 留言 -->
+<section id="comments">
+  <div class="container">
+    <h2>留言</h2>
+    <p>在这里你可以对文章进行评论，并参与讨论。</p>
+
+    <!-- 留言表单 -->
+    <form id="commentForm">
+      <label for="name">姓名：</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">邮箱：</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="message">留言内容：</label>
+      <textarea id="message" name="message" rows="4" required></textarea>
+
+      <button type="submit">提交留言</button>
+    </form>
+
+    <!-- 留言列表 -->
+    <div id="commentSection">
+      <h3>留言板</h3>
+      <ul id="commentList">
+        <!-- 留言内容将显示在这里 -->
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+  <!-- 页脚 -->
+  <footer>
+    <p>&copy; 2024 我的个人博客 | 由我设计和开发</p>
+    <p><a href="#home">回到首页</a></p>
+  </footer>
+
+  <script src="blog.html"></script>
+  <script src = "comments.js"></script>
+</body>
+
+</html>
