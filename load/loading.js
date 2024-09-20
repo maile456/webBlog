@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
             progressBar.style.width = progress + '%'; // 更新进度条宽度
             setTimeout(function () {
                 loader.style.display = 'none'; // 隐藏加载动画
-                window.location.replace('web/blog.html'); // 跳转到目标页面
+                window.location.replace('/web/blog.html'); // 跳转到目标页面
             }, 500); // 可选：在隐藏加载动画后，等待 500 毫秒
         } else {
             progressBar.style.width = progress + '%'; // 更新进度条宽度
