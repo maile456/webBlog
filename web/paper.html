@@ -39,43 +39,98 @@
             <h3>代码实现</h3>
             <pre class="apple-code-block">
                 <code>
-                    #include<iostream>
-                    #include<algorithm>
-                    #include<string.h>
-                    #include<queue>
-                    #include<vector>
-                    using namespace std;
-                    using ll = long long;
-                    const int N = 2e5 + 9;
-                    ll a[N];
-                    int n,m;
-                    ll t[N << 2]; 
-                    ll lz[N << 2]; 
-                    void pushup(int o) { t[o]=t[o << 1] + t[o << 1 | 1]; }
-                    void buildTree(int s=1, int e=n, int o=1) {
-                        if (s==e) { t[o]=a[s]; return; }
-                        int mid=(s + e)>> 1;
-                        buildTree(s, mid, o << 1);
-                        buildTree(mid + 1, e, o << 1 | 1);
-                        pushup(o); 
-                    }
-                    // More code...
-                    int main() { 
-                        cin >> n >> m; 
-                        for (int i = 1; i <= n; i++) cin >> a[i];
-                        buildTree(); 
-                        while (m--) {
-                            int op; cin >> op;
-                            if (op == 1) {
-                                int x, y, k; cin >> x >> y >> k;
-                                add(x, y, k);
-                            }
-                            if (op == 2) {
-                                int x, y; cin >> x >> y;
-                                cout << query(x, y) << '\n'; 
-                            } 
-                        } 
-                    }
+```
+#include<iostream>
+#include<algorithm>
+#include<string.h>
+#include<queue>
+#include<vector>
+using namespace std;
+using ll = long long;
+const int N = 2e5 + 9;
+ll a[N];
+int n,m;
+ll t[N << 2];
+ll lz[N << 2];
+
+void pushup(int o)
+{
+	t[o] = t[o << 1] + t[o << 1 | 1];
+}
+
+void buildTree(int s = 1, int e = n, int o = 1)
+{
+	if (s == e)
+	{
+		t[o] = a[s];
+		return;
+	}
+	int mid = (s + e) >> 1;
+	buildTree(s, mid, o << 1), buildTree(mid + 1, e, o << 1 | 1);
+	pushup(o);
+}
+void pushdown(int s, int e, int o)
+{
+	if (!lz[o])return;
+	int mid = (s + e) >> 1, ls = o << 1, rs = o << 1 | 1;
+	t[ls] += lz[o] * (mid - s + 1);
+	t[rs] += lz[o] * (e - mid);
+	lz[ls] += lz[o], lz[rs] += lz[o];
+	lz[o] = 0;
+}
+void add(int l, int r, ll x, int s = 1, int e = n, int o = 1)
+{
+	if (l <= s && e <= r)
+	{
+		t[o] += 1ll * (e - s + 1) * x;
+		lz[o] += x;
+		return;
+	}
+	pushdown(s, e, o);
+	int mid = (s + e) >> 1;
+
+	if (mid >= l)add(l, r, x, s, mid, o << 1);
+	if (mid + 1 <= r)add(l, r, x, mid + 1, e, o << 1 | 1);
+	pushup(o);
+}
+ll query(int l, int r, int s = 1, int e = n, int o = 1)
+{
+	if (l <= s && e <= r)
+	{
+		return t[o];
+	}
+	ll res = 0;
+	pushdown(s, e, o);
+	int mid = (s + e) >> 1;
+	if (mid >= l)res += query(l, r, s, mid, o << 1);
+	if (mid + 1 <= r)res += query(l, r, mid + 1, e, o << 1 | 1);
+	return res;
+}
+int main()
+{
+	cin >> n >> m;
+	for (int i = 1; i <= n; i++)cin >> a[i];
+	buildTree();
+	while (m--)
+	{
+		int op; cin >> op;
+		if (op == 1)
+		{
+			int x, y, k; cin >> x >> y >> k;
+			add(x, y, k);
+		}
+		if (op == 2)
+		{
+			int x, y; cin >> x >> y;
+			cout << query(x, y) << '\n';
+		}
+	}
+	
+
+	
+}
+```
+
                 </code>
             </pre>
         </div>
