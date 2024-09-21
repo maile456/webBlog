@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function () {
     const navLinks = document.querySelectorAll('nav a');
     const slider = document.querySelector('.slider');

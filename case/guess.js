@@ -1,4 +1,8 @@
 
+document.querySelector("body").addEventListener("click", function () {
+    alert("别戳我，我怕疼。");
+});
+
 let randomNumber = Math.floor(Math.random() * 100) + 1;
 
 let background = document.querySelector("body");

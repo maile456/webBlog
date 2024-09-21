@@ -3,6 +3,12 @@ html,
 body {
   height: 100%;
   margin: 0;
+  background-image: url(makoBackground.jpg);
+  background-size: cover;
+    /* 让背景图覆盖整个屏幕 */
+    background-repeat: no-repeat;
+    /* 防止背景图片重复 */
+    background-position: center;
 }
 
 body {
