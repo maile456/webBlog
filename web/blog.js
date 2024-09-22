@@ -22,4 +22,4 @@ function ciallo()
 {
     alert("Ciallo～(∠・ω< )⌒★");
 }
-setTimeout(ciallo,5000);
+document.addEventListener('DOMContentLoaded', ciallo);
