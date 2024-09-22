@@ -16,3 +16,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+
+function ciallo()
+{
+    alert("Ciallo～(∠・ω< )⌒★");
+}
+ciallo();

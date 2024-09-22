@@ -4,8 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var progress = 0; // 初始化进度为 0
     var maxProgress = 100; // 最大进度（100%）
     var duration = 3000; // 总加载时间（3 秒）
-    var startTime = Date.now(); // 记录开始时间
-
+    var startTime = Date.now(); // 记录开始时间;
     function updateProgress() {
         var elapsedTime = Date.now() - startTime; // 计算已过时间
         progress = (elapsedTime / duration) * maxProgress; // 根据时间计算进度
