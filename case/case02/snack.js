@@ -10,16 +10,16 @@ function Snake() {
     //一个格子的大小，头部移动方向
     this.width = 10;
     this.height = 10;
-    this.direction = 'right'; 
+    this.direction = 'right';
 
     //默认位置
-    this.body = 
-    [
-        { x: 2, y: 0 },
-        { x: 1, y: 0 },
-        { x: 0, y: 0 }
-    ];
-    
+    this.body =
+        [
+            { x: 2, y: 0 },
+            { x: 1, y: 0 },
+            { x: 0, y: 0 }
+        ];
+
     //在坐标处画一个格子
     this.display = function () {
         for (var i = 0; i < this.body.length; i++) {
@@ -35,7 +35,7 @@ function Snake() {
                 map.appendChild(s);
             }
         }
-        this.body[0].flag.style.backgroundColor = 'orange'; 
+        this.body[0].flag.style.backgroundColor = 'orange';
     };
 
 
@@ -65,11 +65,10 @@ function Snake() {
         const mapHeight = map.clientHeight / this.height; // 计算地图高度的格子数
 
         //头部碰撞检查
-        if (this.body[0].x < 0 || this.body[0].x >= mapWidth || this.body[0].y < 0 || this.body[0].y >= mapHeight)
-        {
+        if (this.body[0].x < 0 || this.body[0].x >= mapWidth || this.body[0].y < 0 || this.body[0].y >= mapHeight) {
             clearInterval(timer);
             alert("Over Map, Over Game!");
-            document.getElementById('beginBox').style.display = 'block';
+            document.getElementById('rulesBox').style.display = 'block';
 
             for (var i = 0; i < this.body.length; i++) {
                 if (this.body[i].flag != null) {
@@ -84,6 +83,12 @@ function Snake() {
             ];
             this.direction = 'right';
             this.display();
+            for (var i = 1; i < foods.length; i++)
+            {
+                map.removeChild(foods[i].flag);
+            }
+            score = 0;
+            Score.textContent = "Score:" + score;
             return false;
         }
 
@@ -107,7 +112,7 @@ function Snake() {
         for (var i = 4; i < this.body.length; i++) {
             if (this.body[0].x == this.body[i].x && this.body[0].y == this.body[i].y) {
                 alert('You hit yourself!');
-                document.getElementById('beginBox').style.display = 'block'; // 修正 dispaly 错误
+                document.getElementById('rulesBox').style.display = 'block';
                 for (var j = 0; j < this.body.length; j++) {
                     if (this.body[j].flag != null) {
                         map.removeChild(this.body[j].flag);
@@ -120,6 +125,11 @@ function Snake() {
                 ];
                 this.direction = 'right';
                 this.display();
+                for (var i = 1; i < foods.length; i++) {
+                    map.removeChild(foods[i].flag);
+                }
+                score = 0;
+                Score.textContent = "Score:" + score;
                 return false;
             }
         }
@@ -141,18 +151,18 @@ function Food() {
     this.height = 10;
     this.display = function () {
 
-            var f = document.createElement('div');
-            this.flag = f;
-            f.style.width = this.width + 'px';
-            f.style.height = this.height + 'px';
-            f.style.background = 'red';
-            f.style.position = 'absolute';
-            this.x = Math.floor(Math.random() * 80);
-            this.y = Math.floor(Math.random() * 40);
-            f.style.left = this.x * this.width + 'px';
-            f.style.top = this.y * this.height + 'px';
-            map.appendChild(f);
-        
+        var f = document.createElement('div');
+        this.flag = f;
+        f.style.width = this.width + 'px';
+        f.style.height = this.height + 'px';
+        f.style.background = 'red';
+        f.style.position = 'absolute';
+        this.x = Math.floor(Math.random() * 80);
+        this.y = Math.floor(Math.random() * 40);
+        f.style.left = this.x * this.width + 'px';
+        f.style.top = this.y * this.height + 'px';
+        map.appendChild(f);
+
     };
 }
 function generateFoods(num) {
