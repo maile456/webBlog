@@ -1,4 +1,4 @@
-let time = 50; // 初始速度
+let time = 25; // 初始速度
 let map = document.getElementById('map');
 let timer;
 let score = 0;
@@ -13,7 +13,8 @@ function Snake() {
     this.direction = 'right'; 
 
     //默认位置
-    this.body = [
+    this.body = 
+    [
         { x: 2, y: 0 },
         { x: 1, y: 0 },
         { x: 0, y: 0 }
