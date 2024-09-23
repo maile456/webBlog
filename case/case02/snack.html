@@ -1,24 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snack</title>
     <link rel="stylesheet" href="snack.css">
 </head>
+
 <body>
-    <!--游戏窗口-->
-    <div class = "main">
-        <!--Begin按钮-->
-        <div id = 'beginBox'>
-            <div class = "btn" id = "begin">Begin</div>
+    <!-- 游戏窗口 -->
+    <div class="main">
+        <!-- 规则介绍 -->
+        <div class="rules" id="rulesBox">
+            <h2>游戏规则</h2>
+            <p>1. 使用方向键或WASD键控制蛇的移动。</p>
+            <p>2. 吃掉红色食物，蛇会变长并得分。</p>
+            <p>3. 碰到边界或自己的身体游戏结束。</p>
+            <p>4. 点击“开始”按钮开始游戏。</p>
+            <div class="btn" id="begin">开始游戏</div>
         </div>
 
-        <!--蛇-->
-        <div class = "map" id = "map"></div>
-        
+        <!--分数-->
+        <div class="score" id="score">分数: 0</div>
+
+
+        <!-- 地图 -->
+        <div class="map" id="map"></div>
     </div>
     <script src="snack.js"></script>
-    
 </body>
+
 </html>
