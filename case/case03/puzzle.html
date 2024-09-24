@@ -17,6 +17,7 @@
             <p>1.选择图片或输入图片URL,获得拼图碎片</p>
             <p>2.按ctrl+鼠标滚轮调成合适大小开始游玩</p>
             <p>3.通过点击或使用方向键移动图像块，直到拼图完成。</p>
+            <p>完成拼图有彩蛋哦</p>
         </div>
         <div id="controls">
             <select id="imageSelect">
@@ -35,10 +36,30 @@
             </select>
             <input type="text" id="customImageUrl" placeholder="或输入图片URL" />
             <button id="startGame">开始游戏</button>
+            <button id="simulate-victory">跳过拼图</button>
         </div>
     </div>
     <canvas id="background"></canvas>
     <img id="referenceImage" style="display:none;" />
+
+<div id="victory-slideshow" class="modal">
+    <audio id="victory-audio" src="高森奈津美 - 茉子の日常 (茉子的日常).ogg" loop></audio>
+    <div class="slideshow-container">
+        <img class="slide" src="https://cdn-fusion.imgimg.cc/i/2024/73a9c87edf52ff54.png" alt="mako1">
+        <img class="slide" src="https://cdn-fusion.imgimg.cc/i/2024/a6cc20a5d0cdf3aa.png" alt="mako2">
+        <img class="slide" src="https://cdn-fusion.imgimg.cc/i/2024/587c72068eb430b4.png" alt="mako3">
+        <img class="slide" src="https://cdn-fusion.imgimg.cc/i/2024/bddd33ea041d586b.png" alt="mako4">
+        <img class="slide" src="https://cdn-fusion.imgimg.cc/i/2024/ad205891fc6703d1.png" alt="mako5">
+        <img class="slide" src="https://cdn-fusion.imgimg.cc/i/2024/6b6fd9cb0e06eb38.png" alt="mako6">
+        <img class="slide" src="https://cdn-fusion.imgimg.cc/i/2024/eaa13f1f42965cc2.png" alt="mako7">
+        <img class="slide" src="https://cdn-fusion.imgimg.cc/i/2024/9bfdaf4490c4bc5d.png" alt="mako8">
+        <img class="slide" src="https://cdn-fusion.imgimg.cc/i/2024/7d8f382cf8dbbed1.png" alt="mako9">
+        <img class="slide" src="https://cdn-fusion.imgimg.cc/i/2024/38baa326919bb55a.png" alt="mako10">
+        <img class="slide" src="https://cdn-fusion.imgimg.cc/i/2024/8a12ee31afd0e4dc.png" alt="mako11">
+    </div>
+</div>
+
+
 
     <script src="puzzle.js"></script>
 </body>

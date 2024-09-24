@@ -14,6 +14,8 @@ var isFinish = false;
 var imageUrl = "";
 
 
+
+
 //获取图片，设置画布大小,
 document.getElementById("startGame").onclick = function () {
     imageUrl = document.getElementById("imageSelect").value;
@@ -39,6 +41,7 @@ document.getElementById("startGame").onclick = function () {
     }
 };
 
+//点击画布计算位置 
 background.onclick = function (e) {
     if (isFinish) return;
 
@@ -53,6 +56,8 @@ background.onclick = function (e) {
     if (checkIfFinish()) {
         drawImageItem(imageIndexForPosition[lastIndex()], lastIndex());
         isFinish = true;
+
+
     }
 };
 
@@ -88,12 +93,13 @@ var drawImageItem = function (index, position) {
     }
 };
 
+//清除当前的，在目标处绘画
 var refreshImagePositions = function (origin, target) {
     var originRect = rectForPosition(origin);
     context.clearRect(originRect[0], originRect[1], originRect[2], originRect[3]);
     drawImageItem(imageIndexForPosition[target], target);
 };
-
+//画图
 var drawAllImage = function () {
     for (var position = 0; position < column * column; position++) {
         var index = imageIndexForPosition[position];
@@ -131,6 +137,8 @@ var lastIndex = function () {
     return column * column - 1;
 };
 
+
+//计算四个角点的坐标
 var rectForPosition = function (position) {
     if (position < 0 || position > lastIndex()) return [0, 0, 0, 0];
     var x = (position % column) * (padding + imageWidth / column) + padding;
@@ -175,3 +183,45 @@ var setupRandomPosition = function () {
     background.emptyPosition = 9;
 
 }
+
+//完成游戏彩蛋
+
+let slideIndex = 0; // 当前幻灯片索引
+const slides = document.querySelectorAll(".slide"); // 获取所有幻灯片
+
+function showSlides() {
+    slides.forEach(slide => {
+        slide.style.display = "none";
+    });
+    slideIndex++;
+    if (slideIndex > slides.length) {
+        slideIndex = 1;
+    }
+    slides[slideIndex - 1].style.display = "block";
+    setTimeout(showSlides, 2000); // 每 2 秒切换幻灯片
+}
+
+// 模拟胜利并启动幻灯片
+function handleVictory(isVictory) {
+    if (isVictory === 1 || isFinish) {
+        
+        const modal = document.getElementById("victory-slideshow");
+        modal.style.display = "block"; // 显示幻灯片
+        showSlides(); // 启动幻灯片播放
+        const audio = document.getElementById("victory-audio");
+        audio.play();
+    }
+}
+
+// 点击按钮模拟胜利
+document.getElementById("simulate-victory").onclick = function () {
+    handleVictory(1); // 传入参数 1 来播放幻灯片
+};
+
+// 点击窗外区域关闭幻灯片
+window.onclick = function (event) {
+    const modal = document.getElementById("victory-slideshow");
+    if (event.target == modal) {
+        modal.style.display = "none"; // 隐藏幻灯片
+    }
+};
