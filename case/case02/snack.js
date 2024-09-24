@@ -1,4 +1,4 @@
-let time = 25; // 初始速度
+let time = 15; // 初始速度
 let map = document.getElementById('map');
 let timer;
 let score = 0;
@@ -87,6 +87,7 @@ function Snake() {
             {
                 map.removeChild(foods[i].flag);
             }
+            time = 15;
             score = 0;
             Score.textContent = "Score:" + score;
             return false;
@@ -95,7 +96,7 @@ function Snake() {
         // 判断是否吃到食物
         for (var i = 0; i < foods.length; i++) {
             if (this.body[0].x == foods[i].x && this.body[0].y == foods[i].y) {
-                time--;
+              if(time>=2)time--;
                 score++;
                 generateFoods(score);
                 Score.textContent = "Score:" + score;

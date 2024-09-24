@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MakoPuzzle</title>
+    <link rel="stylesheet" href="puzzle.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>puzzle</h1>
+
+        <div id="rules">
+            <h2>游戏规则</h2>
+            <p>1.选择图片或输入图片URL,获得拼图碎片</p>
+            <p>2.按ctrl+鼠标滚轮调成合适大小开始游玩</p>
+            <p>3.通过点击或使用方向键移动图像块，直到拼图完成。</p>
+        </div>
+        <div id="controls">
+            <select id="imageSelect">
+                <option value="">选择图片</option>
+                <option value="https://cdn-fusion.imgimg.cc/i/2024/73a9c87edf52ff54.png">mako1</option>
+                <option value="https://cdn-fusion.imgimg.cc/i/2024/a6cc20a5d0cdf3aa.png">mako2</option>
+                <option value="https://cdn-fusion.imgimg.cc/i/2024/587c72068eb430b4.png">mako3</option>
+                <option value="https://cdn-fusion.imgimg.cc/i/2024/bddd33ea041d586b.png">mako4</option>
+                <option value="https://cdn-fusion.imgimg.cc/i/2024/ad205891fc6703d1.png">mako5</option>
+                <option value="https://cdn-fusion.imgimg.cc/i/2024/6b6fd9cb0e06eb38.png">mako6</option>
+                <option value="https://cdn-fusion.imgimg.cc/i/2024/eaa13f1f42965cc2.png">mako7</option>
+                <option value="https://cdn-fusion.imgimg.cc/i/2024/9bfdaf4490c4bc5d.png">mako8</option>
+                <option value="https://cdn-fusion.imgimg.cc/i/2024/7d8f382cf8dbbed1.png">mako9</option>
+                <option value="https://cdn-fusion.imgimg.cc/i/2024/38baa326919bb55a.png">mako10</option>
+                <option value="https://cdn-fusion.imgimg.cc/i/2024/8a12ee31afd0e4dc.png">mako11</option>
+            </select>
+            <input type="text" id="customImageUrl" placeholder="或输入图片URL" />
+            <button id="startGame">开始游戏</button>
+        </div>
+    </div>
+    <canvas id="background"></canvas>
+    <img id="referenceImage" style="display:none;" />
+
+    <script src="puzzle.js"></script>
+</body>
+
+</html>
