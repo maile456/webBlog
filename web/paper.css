@@ -54,12 +54,12 @@ nav a:hover {
 
 /* 文章区域样式 */
 .container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .post-meta {
@@ -115,3 +115,14 @@ footer {
 footer p {
     margin: 0;
 }
+        .apple-link {
+            text-decoration: none;
+            /* 取消下划线 */
+            color: #007aff;
+            /* 设置链接颜色 */
+        }
+    
+        .apple-link:hover {
+            text-decoration: underline;
+            /* 鼠标悬停时可以选择加下划线 */
+        }

@@ -26,109 +26,85 @@
 
     <!-- 主要内容 -->
     <div class="container">
-        <img src="makoEat.jpg" alt="图片" class="post-image">
+        <img src="makoEat.jpg" alt="图片" class="post-image" width="50" height="50">
         <div class="post-meta">
             <span>作者: Maile123</span>
             <span>发布日期: 2024年9月18日</span>
-            <h2>线段树</h2>
+            <h2>二分查找</h2>
         </div>
 
         <div class="content">
-            <p>线段树是算法竞赛中常用的用来维护区间信息的数据结构。线段树可以在 O(log N) 的时间复杂度内实现单点修改、区间修改、区间查询等操作。</p>
+            <p>二分查找是一种高效的查找算法，适用于在有序数组中查找特定元素。该算法的基本思想是将搜索范围缩小到一半，从而显著提高查找效率。</p>
+
             <!-- 适用场景模块 -->
             <div class="module">
                 <h3>适用场景</h3>
-                <p>线段树适用于需要频繁修改和查询区间和的场景，如数据分析、游戏开发等。</p>
+                <p>二分查找适用于以下场景：</p>
+                <ol>
+                    <li>当数据已经排好序时，可以快速定位元素。</li>
+                    <li>需要频繁进行查找操作的场合，例如数据库索引。</li>
+                    <li>在实现某些算法时，比如在排序算法中进行合并。</li>
+                </ol>
             </div>
 
             <!-- 时间复杂度模块 -->
             <div class="module">
                 <h3>时间和空间复杂度</h3>
-                <p>时间复杂度: O(log N) 进行修改和查询，空间复杂度: O(N)。</p>
+                <p>时间复杂度: O(log N)，空间复杂度: O(1)（迭代实现）。</p>
             </div>
+
             <!-- 思路模块 -->
             <div class="module">
-                <h3>时间和空间复杂度</h3>
-                <p>时间复杂度: O(log N) 进行修改和查询，空间复杂度: O(N)。</p>
+                <h3>算法思路</h3>
+                <p>二分查找的基本思路如下：</p>
+                <ol>
+                    <li>首先确定查找范围的开始和结束索引。（左闭右开、左闭右闭两种写法）</li>
+                    <li>计算中间索引，判断中间值是否在期望区间，根据这点来缩减区间。</li>
+                    <li>重复以上步骤，直到找到目标值或查找范围为空。</li>
+                </ol>
             </div>
+
             <h3>代码实现</h3>
             <pre class="apple-code-block">
                 <code>
 #include<iostream>
-#include<algorithm>
-#include<string.h>
-#include<queue>
-#include<vector>
-using namespace std;
-using ll = long long;
-const int N = 2e5 + 9;
-ll a[N];
-int n,m;
-ll t[N << 2];
-ll lz[N << 2];
+    using namespace std;
+    using ll = long long;
+    const int N = 1e6 + 10;
+    ll a[N];
 
-void pushup(int o) { t[o] = t[o << 1] + t[o << 1 | 1; }
-void buildTree(int s = 1, int e = n, int o = 1) {
-    if (s == e) { t[o] = a[s]; return; }
-    int mid = (s + e) >> 1;
-    buildTree(s, mid, o << 1), buildTree(mid + 1, e, o << 1 | 1);
-    pushup(o);
-}
-void pushdown(int s, int e, int o) {
-    if (!lz[o]) return;
-    int mid = (s + e) >> 1, ls = o << 1, rs = o << 1 | 1;
-    t[ls] += lz[o] * (mid - s + 1);
-    t[rs] += lz[o] * (e - mid);
-    lz[ls] += lz[o], lz[rs] += lz[o];
-    lz[o] = 0;
-}
-void add(int l, int r, ll x, int s = 1, int e = n, int o = 1) {
-    if (l <= s && e <= r) {
-        t[o] += 1ll * (e - s + 1) * x;
-        lz[o] += x; return;
-    }
-    pushdown(s, e, o);
-    int mid = (s + e) >> 1;
-    if (mid >= l) add(l, r, x, s, mid, o << 1);
-    if (mid + 1 <= r) add(l, r, x, mid + 1, e, o << 1 | 1);
-    pushup(o);
-}
-ll query(int l, int r, int s = 1, int e = n, int o = 1) {
-    if (l <= s && e <= r) { return t[o]; }
-    ll res = 0; pushdown(s, e, o);
-    int mid = (s + e) >> 1;
-    if (mid >= l) res += query(l, r, s, mid, o << 1);
-    if (mid + 1 <= r) res += query(l, r, mid + 1, e, o << 1 | 1);
-    return res;
-}
-int main() {
-    cin >> n >> m;
-    for (int i = 1; i <= n; i++) cin >> a[i];
-    buildTree();
-    while (m--) {
-        int op; cin >> op;
-        if (op == 1) {
-            int x, y, k; cin >> x >> y >> k; add(x, y, k);
+    int main() 
+    {
+    ios::sync_with_stdio, cin.tie(0), cout.tie(0);
+    int n, m; cin >> n >> m;
+    for (int i = 1; i <= n; i++)cin>> a[i];
+
+        while (m--)
+        {
+        ll num; cin >> num;
+        ll l = 1, r = n+1;
+        while (l <r) 
+        { 
+            ll mid=(l + r)/2; 
+            if (a[mid] <num)l=mid+1; 
+            if (a[mid]>= num)r = mid;
         }
-        if (op == 2) {
-            int x, y; cin >> x >> y; cout << query(x, y) << '\n';
-        }
+        if (a[l] == num)cout << l << ' ' ;
+         else cout << -1 << ' ' ; 
+        } 
     }
-}
                 </code>
             </pre>
-        </div>
 
-
-
-        <!-- 练习模块 -->
-        <div class="module">
-            <h3>练习</h3>
-            <ul>
-                <li>实现线段树的基本操作</li>
-                <li>解决区间和问题</li>
-                <li>应用线段树解决其他问题</li>
-            </ul>
+            <!-- 练习模块 -->
+            <div class="module">
+                <h3>练习</h3>
+                <ul>
+                    <li><a href="https://www.luogu.com.cn/problem/solution/P2249" class="apple-link" target="_blank">
+                            <p4>二分查找</p4>
+                        </a></li>
+                </ul>
+            </div>
         </div>
     </div>
 
