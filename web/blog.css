@@ -5,12 +5,16 @@ body {
   margin: 0;
   background-image: url(makoBackground.jpg);
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+    /* 让背景图覆盖整个屏幕 */
+    background-repeat: no-repeat;
+    /* 防止背景图片重复 */
+    background-position: center;
 }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
   background-color: #f2f2f7;
   color: #1c1c1e;
   overflow-x: hidden;
@@ -20,6 +24,7 @@ body {
 
 .slider {
   flex: 1;
+  /* 使内容区域占据剩余的空间 */
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
@@ -51,6 +56,11 @@ h3 {
   margin-bottom: 15px;
 }
 
+.post,
+.project {
+  margin-bottom: 20px;
+}
+
 .about {
   text-align: center;
 }
@@ -63,7 +73,6 @@ h3 {
   border: 2px solid #007aff;
 }
 
-/* 留言表单 */
 form {
   display: flex;
   flex-direction: column;
@@ -82,6 +91,11 @@ textarea {
   font-size: 16px;
 }
 
+input[type="text"]:focus,
+input[type="email"]:focus {
+  border-color: #007aff;
+}
+
 button {
   background-color: #007aff;
   color: white;
@@ -93,6 +107,10 @@ button {
   transition: background-color 0.3s ease;
 }
 
+button:hover {
+  background-color: #005bb5;
+}
+
 /* 页头样式 */
 header {
   background-color: #007aff;
@@ -100,6 +118,16 @@ header {
   padding: 20px;
   text-align: center;
   border-bottom: 1px solid #e5e5ea;
+}
+
+header h1 {
+  font-size: 36px;
+  margin: 0;
+}
+
+header p {
+  font-size: 18px;
+  margin: 10px 0 0;
 }
 
 nav {
@@ -113,6 +141,10 @@ nav a {
   font-size: 18px;
 }
 
+nav a:hover {
+  text-decoration: underline;
+}
+
 /* 页脚样式 */
 footer {
   text-align: center;
@@ -121,56 +153,11 @@ footer {
   color: white;
   border-top: 1px solid #e5e5ea;
   margin-top: auto;
+  /* 确保页脚在底部 */
 }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .container {
-    padding: 10px;
-  }
-
-  h2 {
-    font-size: 24px;
-  }
-
-  h3 {
-    font-size: 20px;
-  }
-
-  .about img {
-    width: 120px;
-    height: 120px;
-  }
-
-  input[type="text"],
-  input[type="email"],
-  textarea {
-    font-size: 14px;
-  }
-
-  button {
-    padding: 10px 20px;
-    font-size: 16px;
-  }
-
-  .project-card {
-    flex: 1 1 100%;
-    max-width: 100%;
-    margin-bottom: 20px;
-  }
-
-  .projects {
-    flex-direction: column;
-  }
-
-  nav {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  nav a {
-    margin: 10px 0;
-    font-size: 16px;
-  }
+footer p {
+  margin: 0;
 }
+/*/
+/* 博客文章区域样式 */
