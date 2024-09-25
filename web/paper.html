@@ -2,44 +2,58 @@
 <html lang="zh-CN">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Maile123のBlog</title>
-    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Text:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="paper.css">
-    <link rel="icon" href="/web/bitbug_favicon.ico" type="image/x-icon">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Maile123のBlog</title>
+	<link href="https://fonts.googleapis.com/css2?family=SF+Pro+Text:wght@400;600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="paper.css">
+	<link rel="icon" href="/web/bitbug_favicon.ico" type="image/x-icon">
 </head>
 
 <body>
-    <!-- 页头 -->
-    <header>
-        <h1>Maile123のBlog</h1>
-        <p>分享技术、生活与思考</p>
-        <nav>
-            <a href="#about">关于我</a>
-            <a href="#posts">博客文章</a>
-            <a href="#projects">项目</a>
-            <a href="#contact">联系我</a>
-        </nav>
-    </header>
+	<!-- 页头 -->
+	<header>
+		<h1>Maile123のBlog</h1>
+		<p>分享技术、生活与思考</p>
+		<nav>
+			<a href="blog.html">关于我</a>
+			<a href="blog.html">博客文章</a>
+			<a href="blog.html">项目</a>
+			<a href="mailto:911464719z@gmail.com?subject=你好&body=Ciallo～(∠・ω< )⌒★">联系我</a>
+		</nav>
+	</header>
 
-    <!-- 主要内容 -->
-    <div class="container">
-        <img src="makoEat.jpg" alt="图片" class="post-image" width="50" height="50">
-        <div class="post-meta">
-            <span>作者: Maile123</span>
-            <span>发布日期: 2024年9月18日</span>
-            <h2>线段树</h2>
-        </div>
+	<!-- 主要内容 -->
+	<div class="container">
+		<img src="makoEat.jpg" alt="图片" class="post-image">
+		<div class="post-meta">
+			<span>作者: Maile123</span>
+			<span>发布日期: 2024年9月18日</span>
+			<h2>线段树</h2>
+		</div>
 
-        <div class="content">
-            <p>线段树是算法竞赛中常用的用来维护区间信息的数据结构。线段树可以在 O(log N) 的时间复杂度内实现单点修改、区间修改、区间查询等操作。</p>
+		<div class="content">
+			<p>线段树是算法竞赛中常用的用来维护区间信息的数据结构。线段树可以在 O(log N) 的时间复杂度内实现单点修改、区间修改、区间查询等操作。</p>
+			<!-- 适用场景模块 -->
+			<div class="module">
+				<h3>适用场景</h3>
+				<p>线段树适用于需要频繁修改和查询区间和的场景，如数据分析、游戏开发等。</p>
+			</div>
 
-            <h3>代码实现</h3>
-            <pre class="apple-code-block">
+			<!-- 时间复杂度模块 -->
+			<div class="module">
+				<h3>时间和空间复杂度</h3>
+				<p>时间复杂度: O(log N) 进行修改和查询，空间复杂度: O(N)。</p>
+			</div>
+			<!-- 思路模块 -->
+			<div class="ideas">
+				<h3>思路</h3>
+				<p>时间复杂度: O(log N) 进行修改和查询，空间复杂度: O(N)。</p>
+			</div>
+			<h3>代码实现</h3>
+			<pre class="apple-code-block">
                 <code>
-```
 #include<iostream>
 #include<algorithm>
 #include<string.h>
@@ -53,93 +67,75 @@ int n,m;
 ll t[N << 2];
 ll lz[N << 2];
 
-void pushup(int o)
-{
-	t[o] = t[o << 1] + t[o << 1 | 1];
+void pushup(int o) { t[o] = t[o << 1] + t[o << 1 | 1; }
+void buildTree(int s = 1, int e = n, int o = 1) {
+    if (s == e) { t[o] = a[s]; return; }
+    int mid = (s + e) >> 1;
+    buildTree(s, mid, o << 1), buildTree(mid + 1, e, o << 1 | 1);
+    pushup(o);
 }
-
-void buildTree(int s = 1, int e = n, int o = 1)
-{
-	if (s == e)
-	{
-		t[o] = a[s];
-		return;
-	}
-	int mid = (s + e) >> 1;
-	buildTree(s, mid, o << 1), buildTree(mid + 1, e, o << 1 | 1);
-	pushup(o);
+void pushdown(int s, int e, int o) {
+    if (!lz[o]) return;
+    int mid = (s + e) >> 1, ls = o << 1, rs = o << 1 | 1;
+    t[ls] += lz[o] * (mid - s + 1);
+    t[rs] += lz[o] * (e - mid);
+    lz[ls] += lz[o], lz[rs] += lz[o];
+    lz[o] = 0;
 }
-void pushdown(int s, int e, int o)
-{
-	if (!lz[o])return;
-	int mid = (s + e) >> 1, ls = o << 1, rs = o << 1 | 1;
-	t[ls] += lz[o] * (mid - s + 1);
-	t[rs] += lz[o] * (e - mid);
-	lz[ls] += lz[o], lz[rs] += lz[o];
-	lz[o] = 0;
+void add(int l, int r, ll x, int s = 1, int e = n, int o = 1) {
+    if (l <= s && e <= r) {
+        t[o] += 1ll * (e - s + 1) * x;
+        lz[o] += x; return;
+    }
+    pushdown(s, e, o);
+    int mid = (s + e) >> 1;
+    if (mid >= l) add(l, r, x, s, mid, o << 1);
+    if (mid + 1 <= r) add(l, r, x, mid + 1, e, o << 1 | 1);
+    pushup(o);
 }
-void add(int l, int r, ll x, int s = 1, int e = n, int o = 1)
-{
-	if (l <= s && e <= r)
-	{
-		t[o] += 1ll * (e - s + 1) * x;
-		lz[o] += x;
-		return;
-	}
-	pushdown(s, e, o);
-	int mid = (s + e) >> 1;
-
-	if (mid >= l)add(l, r, x, s, mid, o << 1);
-	if (mid + 1 <= r)add(l, r, x, mid + 1, e, o << 1 | 1);
-	pushup(o);
+ll query(int l, int r, int s = 1, int e = n, int o = 1) {
+    if (l <= s && e <= r) { return t[o]; }
+    ll res = 0; pushdown(s, e, o);
+    int mid = (s + e) >> 1;
+    if (mid >= l) res += query(l, r, s, mid, o << 1);
+    if (mid + 1 <= r) res += query(l, r, mid + 1, e, o << 1 | 1);
+    return res;
 }
-ll query(int l, int r, int s = 1, int e = n, int o = 1)
-{
-	if (l <= s && e <= r)
-	{
-		return t[o];
-	}
-	ll res = 0;
-	pushdown(s, e, o);
-	int mid = (s + e) >> 1;
-	if (mid >= l)res += query(l, r, s, mid, o << 1);
-	if (mid + 1 <= r)res += query(l, r, mid + 1, e, o << 1 | 1);
-	return res;
+int main() {
+    cin >> n >> m;
+    for (int i = 1; i <= n; i++) cin >> a[i];
+    buildTree();
+    while (m--) {
+        int op; cin >> op;
+        if (op == 1) {
+            int x, y, k; cin >> x >> y >> k; add(x, y, k);
+        }
+        if (op == 2) {
+            int x, y; cin >> x >> y; cout << query(x, y) << '\n';
+        }
+    }
 }
-int main()
-{
-	cin >> n >> m;
-	for (int i = 1; i <= n; i++)cin >> a[i];
-	buildTree();
-	while (m--)
-	{
-		int op; cin >> op;
-		if (op == 1)
-		{
-			int x, y, k; cin >> x >> y >> k;
-			add(x, y, k);
-		}
-		if (op == 2)
-		{
-			int x, y; cin >> x >> y;
-			cout << query(x, y) << '\n';
-		}
-	}
-	
-
-	
-}
-```
-
                 </code>
             </pre>
-        </div>
-    </div>
+		</div>
 
-    <!-- 页脚 -->
-    <footer>
-        <p>&copy; 2024 Maile123のBlog | Designed by Maile123</p>
-    </footer>
+
+
+		<!-- 练习模块 -->
+		<div class="module">
+			<h3>练习</h3>
+			<ul>
+				<li>实现线段树的基本操作</li>
+				<li>解决区间和问题</li>
+				<li>应用线段树解决其他问题</li>
+			</ul>
+		</div>
+	</div>
+
+	<!-- 页脚 -->
+	<footer>
+		<p>&copy; 2024 Maile123のBlog | Designed by Maile123</p>
+	</footer>
 </body>
 
 </html>

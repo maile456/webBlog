@@ -6,7 +6,8 @@
 }
 
 .project-card {
-    flex: 1 1 calc(50% - 20px);
+    flex: 1 1 calc(33.33% - 20px);
+    /* 使卡片占据三分之一的宽度 */
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -22,11 +23,14 @@
 }
 
 .project-card h3 {
-    font-size: 1.5rem;
+    font-size: 2rem;
+    /* 增加标题字体大小 */
     margin-top: 0;
 }
 
 .project-card p {
+    font-size: 1.1rem;
+    /* 增加段落字体大小 */
     margin: 10px 0;
 }
 
