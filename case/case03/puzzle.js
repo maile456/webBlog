@@ -203,7 +203,7 @@ function showSlides() {
 
 // 模拟胜利并启动幻灯片
 function handleVictory(isVictory) {
-    if (isVictory === 1 || isFinish) {
+    if (isVictory === 1) {
         
         const modal = document.getElementById("victory-slideshow");
         modal.style.display = "block"; // 显示幻灯片
@@ -225,3 +225,14 @@ window.onclick = function (event) {
         modal.style.display = "none"; // 隐藏幻灯片
     }
 };
+setInterval(() => {
+    if (isFinish== 1) {
+
+        const modal = document.getElementById("victory-slideshow");
+        modal.style.display = "block"; // 显示幻灯片
+        showSlides(); // 启动幻灯片播放
+        const audio = document.getElementById("victory-audio");
+        audio.play();
+    }
+    
+}, 500);
