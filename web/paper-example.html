@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Maile123のBlog</title>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Text:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="paper.css">
+    <link rel="icon" href="/web/bitbug_favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <!-- 页头 -->
+    <header>
+        <h1>Maile123のBlog</h1>
+        <p>分享技术、生活与思考</p>
+        <nav>
+            <a href="blog.html">关于我</a>
+            <a href="blog.html">博客文章</a>
+            <a href="blog.html">项目</a>
+            <a href="mailto:911464719z@gmail.com?subject=你好&body=Ciallo～(∠・ω< )⌒★">联系我</a>
+        </nav>
+    </header>
+
+    <!-- 主要内容 -->
+    <div class="container">
+        <img src="makoEat.jpg" alt="图片" class="post-image" width="50" height="50">
+        <div class="post-meta">
+            <span>作者: Maile123</span>
+            <span>发布日期: 2024年9月18日</span>
+            <h2>二分查找</h2>
+        </div>
+
+        <div class="content">
+            <p>二分查找是一种高效的查找算法，适用于在有序数组中查找特定元素。该算法的基本思想是将搜索范围缩小到一半，从而显著提高查找效率。</p>
+
+            <!-- 适用场景模块 -->
+            <div class="module">
+                <h3>适用场景</h3>
+                <p>二分查找适用于以下场景：</p>
+                <ul>
+                    <li>有界性，单调性
+                    </li>
+                </ul>
+                <ol>
+                    <li>当数据已经排好序时，可以快速定位元素。</li>
+                    <li>二分找答案,check()函数判断</li>
+                </ol>
+
+            </div>
+
+            <!-- 时间复杂度模块 -->
+            <div class="module">
+                <h3>时间和空间复杂度</h3>
+                <p>时间复杂度: O(log N)，空间复杂度: O(1)（迭代实现）。</p>
+            </div>
+
+            <!-- 思路模块 -->
+            <div class="module">
+                <h3>算法思路</h3>
+                <p>二分查找的基本思路如下：</p>
+                <ol>
+                    <li>首先确定查找范围的开始和结束索引。（左闭右开、左闭右闭两种写法）</li>
+                    <li>计算中间索引，check判断中间值是否在期望区间，根据这点来缩减区间。</li>
+                    <li>重复以上步骤，直到找到目标值或查找范围为空。</li>
+                    
+                </ol>
+            </div>
+
+            <h3>代码实现</h3>
+            <pre class="apple-code-block">
+                <code>
+#include<iostream>
+    using namespace std;
+    using ll = long long;
+    const int N = 1e6 + 10;
+    ll a[N];
+
+    int main() 
+    {
+    ios::sync_with_stdio, cin.tie(0), cout.tie(0);
+    int n, m; cin >> n >> m;
+    for (int i = 1; i <= n; i++)cin>> a[i];
+
+        while (m--)
+        {
+        ll num; cin >> num;
+        ll l = 1, r = n+1;
+        while (l <r) 
+        { 
+            ll mid=(l + r)/2; 
+            if (a[mid] <num)l=mid+1; 
+            if (a[mid]>= num)r = mid;
+        }
+        if (a[l] == num)cout << l << ' ' ;
+         else cout << -1 << ' ' ; 
+        } 
+    }
+                </code>
+            </pre>
+
+            <!-- 练习模块 -->
+            <div class="module">
+                <h3>练习</h3>
+                <ul>
+                    <li><a href="https://www.luogu.com.cn/problem/solution/P2249" class="apple-link" target="_blank">
+                            <p4>二分查找</p4>
+                        </a></li>
+                    <li><a href="https://www.luogu.com.cn/problem/P2678" class="apple-link" target="_blank">
+                            <p4>跳石头</p4>
+                        </a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <p>&copy; 2024 Maile123のBlog | Designed by Maile123</p>
+    </footer>
+</body>
+
+</html>

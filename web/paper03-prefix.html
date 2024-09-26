@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Maile123のBlog</title>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Text:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="paper.css">
+    <link rel="icon" href="/web/bitbug_favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <!-- 页头 -->
+    <header>
+        <h1>Maile123のBlog</h1>
+        <p>分享技术、生活与思考</p>
+        <nav>
+            <a href="blog.html">关于我</a>
+            <a href="blog.html">博客文章</a>
+            <a href="blog.html">项目</a>
+            <a href="mailto:911464719z@gmail.com?subject=你好&body=Ciallo～(∠・ω< )⌒★">联系我</a>
+        </nav>
+    </header>
+
+    <!-- 主要内容 -->
+    <div class="container">
+        <img src="makoEat.jpg" alt="图片" class="post-image" width="50" height="50">
+        <div class="post-meta">
+            <span>作者: Maile123</span>
+            <span>发布日期: 2024年9月26日</span>
+            <h2>前缀和，差分，离散化</h2>
+        </div>
+
+        <div class="content">
+            <p>本篇博客将介绍前缀和、差分与离散化三种高效处理区间问题和大数据范围问题的算法技巧，并结合实际代码与练习，帮助你更好地理解和运用这些算法。</p>
+
+            <!-- 适用场景模块 -->
+            <div class="module">
+                <h3>适用场景</h3>
+                <ul>
+                    <li>前缀和：需要快速求解数组的任意区间和，如区域和、累计统计等。</li>
+                    <li>差分：需要频繁对数组进行区间加减操作，如区间更新或批量修改。</li>
+                    <li>离散化：数据范围过大或稀疏时，利用离散化映射到较小范围，方便处理。</li>
+                </ul>
+            </div>
+
+            <!-- 时间和空间复杂度模块 -->
+            <div class="module">
+                <h3>时间和空间复杂度</h3>
+                <ul>
+                    <li>前缀和：预处理 $O(n)$，查询 $O(1)$，空间复杂度 $O(n)$。</li>
+                    <li>差分：预处理 $O(n)$，修改 $O(1)$，还原 $O(n)$，空间复杂度 $O(n)$。</li>
+                    <li>离散化：预处理 $O(n \log n)$，查询 $O(\log n)$，空间复杂度 $O(n)$。</li>
+                </ul>
+            </div>
+
+            <!-- 思路模块 -->
+            <div class="module">
+                <h3>算法思路</h3>
+                <p><strong>前缀和</strong>：通过累加前面的值构建前缀和数组，查询任意区间和只需通过前缀和数组相减即可快速得出。</p>
+                <p><strong>差分</strong>：利用差分数组记录区间的变化，每次只修改两个位置，最后通过累加差分数组还原结果。</p>
+                <p><strong>离散化</strong>：对大范围的数值进行排序和去重映射到较小的整数范围，便于快速查找和更新。</p>
+            </div>
+
+            <!-- 代码实现模块 -->
+            <div class="module">
+                <h3>代码实现</h3>
+
+                <h4>前缀和实现</h4>
+                <pre class="apple-code-block">
+                <code>
+#include<iostream>
+using namespace std;
+const int N = 1e5+10;
+int a[N], pre[N];
+
+int main() {
+    int n;
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        cin >> a[i];
+        pre[i] = pre[i - 1] + a[i];
+    }
+    int l, r;
+    cin >> l >> r;
+    cout << pre[r] - pre[l - 1] << endl;
+}
+                </code>
+            </pre>
+
+                <h4>差分实现</h4>
+                <pre class="apple-code-block">
+                <code>
+#include<iostream>
+using namespace std;
+const int N = 1e5+10;
+int a[N], diff[N];
+
+void add(int l, int r, int val) {
+    diff[l] += val;
+    diff[r + 1] -= val;
+}
+
+int main() {
+    int n;
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        cin >> a[i];
+        diff[i] = a[i] - a[i - 1];
+    }
+    
+    int l, r, val;
+    cin >> l >> r >> val;
+    add(l, r, val);
+    
+    for (int i = 1; i <= n; i++) {
+        a[i] = a[i - 1] + diff[i];
+        cout << a[i] << " ";
+    }
+    cout << endl;
+}
+                </code>
+            </pre>
+
+                <h4>离散化实现</h4>
+                <pre class="apple-code-block">
+                <code>
+#include<iostream>
+#include<algorithm>
+#include<vector>
+using namespace std;
+
+const int N = 1e5+10;
+int a[N];
+vector<int> vals;
+
+int main() {
+    int n;
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        cin >> a[i];
+        vals.push_back(a[i]);
+    }
+    
+    sort(vals.begin(), vals.end());
+    vals.erase(unique(vals.begin(), vals.end()), vals.end());
+    
+    for (int i = 1; i <= n; i++) {
+        int id = lower_bound(vals.begin(), vals.end(), a[i]) - vals.begin() + 1;
+        cout << "原值: " << a[i] << " -> 离散化后的值: " << id << endl;
+    }
+}
+                </code>
+            </pre>
+
+            </div>
+
+            <!-- 练习模块 -->
+            <div class="module">
+                <h3>练习</h3>
+                <ul>
+                    <li><a href="https://www.luogu.com.cn/problem/P1719" class="apple-link"
+                            target="_blank">最大加权矩形</a></li>
+                    <li><a href="https://www.luogu.com.cn/problem/P2367" class="apple-link"
+                            target="_blank">语文成绩</a></li>
+                    <li><a href="https://www.luogu.com.cn/problem/P1496" class="apple-link"
+                            target="_blank">火烧赤壁</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <p>&copy; 2024 Maile123のBlog | Designed by Maile123</p>
+    </footer>
+</body>
+
+</html>
