@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Maile123のBlog</title>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Text:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="paper.css">
+    <link rel="icon" href="/web/bitbug_favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <!-- 页头 -->
+    <header>
+        <h1>Maile123のBlog</h1>
+        <p>分享技术、生活与思考</p>
+        <nav>
+            <a href="blog.html">关于我</a>
+            <a href="blog.html">博客文章</a>
+            <a href="blog.html">项目</a>
+            <a href="mailto:911464719z@gmail.com?subject=你好&body=Ciallo～(∠・ω< )⌒★">联系我</a>
+        </nav>
+    </header>
+
+    <!-- 主要内容 -->
+    <div class="container">
+        <img src="makoEat.jpg" alt="图片" class="post-image" width="50" height="50">
+        <div class="post-meta">
+            <span>作者: Maile123</span>
+            <span>发布日期: 2024年9月26日</span>
+            <h2>图的存储方法：邻接矩阵与邻接表</h2>
+        </div>
+
+        <div class="content">
+            <p>本篇博客将介绍图的存储方法，包括邻接矩阵和邻接表，帮助你更好地理解和运用这些存图方式。</p>
+
+            <!-- 邻接矩阵模块 -->
+            <div class="module">
+                <h3>邻接矩阵</h3>
+                <p><strong>介绍：</strong>邻接矩阵是一个V×V的二维数组，其中V是图中顶点的数量。如果存在边连接顶点i和顶点j，矩阵元素<code>matrix[i][j]</code>设为w，否则设为0。
+                </p>
+
+                <h4>适用场景</h4>
+                <ul>
+                    <li>适合稠密图（边数接近顶点数的平方），例如全连接图。</li>
+                    <li>需要快速查找边的场景，特别是在边的查询频繁的情况下。</li>
+                </ul>
+
+                <h4>时间和空间复杂度</h4>
+                <ul>
+                    <li>时间复杂度：查找边的时间复杂度为O(1)，构建邻接矩阵的时间复杂度为O(V²)。</li>
+                    <li>空间复杂度：O(V²)，因为需要一个V×V的二维数组来存储边的信息。</li>
+                </ul>
+
+                <h4>思路</h4>
+                <p>使用二维数组直接表示图，便于快速判断任意两顶点之间是否有边，适合于需要频繁查询边的算法。</p>
+
+                <h4>代码实现</h4>
+                <pre class="apple-code-block">
+                <code>
+
+```
+#include<iostream>
+#include<algorithm>
+using namespace std;
+using ll = long long;
+const int N = 1e3+10;
+int g[N][N];
+
+int main() {
+
+    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+    int n, m; cin >> n >> m;
+    for (int i =1; i <= m; i++) 
+    { int u, v, w; cin>> u >> v >> w;
+     g[u][v] = w;
+     g[v][u] = w;
+    }
+
+ }
+```
+                </code>
+            </pre>
+            </div>
+
+            <!-- 邻接表模块 -->
+            <div class="module">
+                <h3>邻接表</h3>
+                <p><strong>介绍：</strong>邻接表使用一个数组，每个元素是一个链表，存储与该顶点相邻的所有顶点。</p>
+
+                <h4>适用场景</h4>
+                <ul>
+                    <li>适合稀疏图（顶点数远大于边数）。</li>
+                </ul>
+
+                <h4>时间和空间复杂度</h4>
+                <ul>
+                    <li>时间复杂度：O(V + E)构建，O(V)查找。</li>
+                    <li>空间复杂度：O(V + E)。</li>
+                </ul>
+
+                <h4>思路</h4>
+                <p>每个顶点存储其相邻顶点的列表，节省空间且适合动态边的情况。</p>
+
+                <h4>代码实现</h4>
+                <pre class="apple-code-block">
+                <code>
+```
+#include<iostream>
+#include<algorithm>
+#include<vector>
+using namespace std;
+using ll = long long;
+const int N = 1e3+10;
+vector<pair<int, int>> g[N];
+
+int main() {
+
+	ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+	int n, m; cin >> n >> m;
+	for (int i =1; i <= m; i++)
+	{
+		int u, v, w; cin >> u >> v >> w;
+		g[u].push_back({ v, w});
+		g[v].push_back({ u,w });
+	}
+
+}
+```
+                </code>
+            </pre>
+            </div>
+
+            <!-- 练习模块 -->
+            <div class="module">
+                <h3>练习</h3>
+                <ul>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <p>&copy; 2024 Maile123のBlog | Designed by Maile123</p>
+    </footer>
+</body>
+
+</html>
