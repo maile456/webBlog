@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Maile123のBlog</title>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Text:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="paper.css">
+    <link rel="icon" href="/web/bitbug_favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <!-- 页头 -->
+    <header>
+        <h1>Maile123のBlog</h1>
+        <p>分享技术、生活与思考</p>
+        <nav>
+            <a href="blog.html">关于我</a>
+            <a href="blog.html">博客文章</a>
+            <a href="blog.html">项目</a>
+            <a href="mailto:911464719z@gmail.com?subject=你好&body=Ciallo～(∠・ω< )⌒★">联系我</a>
+        </nav>
+    </header>
+
+    <!-- 主要内容 -->
+    <div class="container">
+        <img src="makoEat.jpg" alt="图片" class="post-image" width="50" height="50">
+        <div class="post-meta">
+            <span>作者: Maile123</span>
+            <span>发布日期: 2024年9月27日</span>
+            <h2>最小生成树（MST）</h2>
+        </div>
+
+        <div class="content">
+            <p>最小生成树是一个无向图的一个子集，包含所有顶点，且使得边的总权重最小。它可以用于优化连接所有点的成本，例如在网络设计、道路建设和电网布局中。</p>
+
+            <!-- 适用场景模块 -->
+            <div class="module">
+                <h3>适用场景</h3>
+                <p>最小生成树适用于以下场景：</p>
+                <ul>
+                    <li>网络设计（如计算机网络、电力网络）。</li>
+                    <li>城市交通规划。</li>
+                    <li>运输和物流问题（如最短路径、配送路线）。</li>
+                </ul>
+            </div>
+
+            <!-- 时间复杂度模块 -->
+            <div class="module">
+                <h3>时间和空间复杂度</h3>
+                <p>Kruskal 算法：</p>
+                <ul>
+                    <li>时间复杂度：O(E log E)，E 为边的数量。</li>
+                    <li>空间复杂度：O(V + E)，V 为顶点数量。</li>
+                </ul>
+                <p>Prim 算法：</p>
+                <ul>
+                    <li>时间复杂度：O(E log V)（使用优先队列），O(V²)（使用邻接矩阵）。</li>
+                    <li>空间复杂度：O(V)。</li>
+                </ul>
+            </div>
+
+            <!-- 思路模块 -->
+            <div class="module">
+                <h3>算法思路</h3>
+                <p>最小生成树的基本思路如下：</p>
+                <ul>
+                    <li><strong>Kruskal 算法：</strong>将图的所有边按权重升序排序，然后逐条检查边，选择不形成环的边，直到包含所有顶点。</li>
+                    <li><strong>Prim 算法：</strong>从任意顶点开始，将其标记为已访问。选择一条权重最小且连接未访问顶点的边，重复直到所有顶点都被访问。</li>
+                </ul>
+            </div>
+
+            <h3>代码实现</h3>
+            <h4>Kruskal 算法</h4>
+            <pre class="apple-code-block">
+                <code>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+struct Edge {
+    int u, v, weight;
+};
+
+bool compare(Edge a, Edge b) {
+    return a.weight < b.weight;
+}
+
+int find(int parent[], int x) {
+    if (parent[x] != x)
+        parent[x] = find(parent, parent[x]);
+    return parent[x];
+}
+
+void unionSet(int parent[], int rank[], int u, int v) {
+    int rootU = find(parent, u);
+    int rootV = find(parent, v);
+    if (rootU != rootV) {
+        if (rank[rootU] > rank[rootV]) {
+            parent[rootV] = rootU;
+        } else {
+            parent[rootU] = rootV;
+            if (rank[rootU] == rank[rootV])
+                rank[rootV]++;
+        }
+    }
+}
+
+int main() {
+    int V, E;
+    cin >> V >> E;
+    vector<Edge> edges(E);
+    for (int i = 0; i < E; i++) {
+        cin >> edges[i].u >> edges[i].v >> edges[i].weight;
+    }
+    
+    sort(edges.begin(), edges.end(), compare);
+    int parent[V], rank[V] = {0};
+    for (int i = 0; i < V; i++) {
+        parent[i] = i;
+    }
+
+    vector<Edge> mst;
+    for (Edge edge : edges) {
+        if (find(parent, edge.u) != find(parent, edge.v)) {
+            unionSet(parent, rank, edge.u, edge.v);
+            mst.push_back(edge);
+        }
+    }
+
+    // 输出最小生成树
+    for (Edge edge : mst) {
+        cout << edge.u << " -- " << edge.v << " = " << edge.weight << endl;
+    }
+}
+                </code>
+            </pre>
+
+            <h4>Prim 算法</h4>
+            <pre class="apple-code-block">
+                <code>
+#include <iostream>
+#include <vector>
+#include <queue>
+using namespace std;
+
+const int INF = 1e9;
+
+int main() {
+    int V, E;
+    cin >> V >> E;
+    vector<pair<int, int>> graph[V];
+
+    for (int i = 0; i < E; i++) {
+        int u, v, w;
+        cin >> u >> v >> w;
+        graph[u].push_back({v, w});
+        graph[v].push_back({u, w});
+    }
+
+    vector<int> minWeight(V, INF);
+    vector<bool> inMST(V, false);
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+
+    minWeight[0] = 0; // 从第一个顶点开始
+    pq.push({0, 0}); // 权重, 顶点
+
+    while (!pq.empty()) {
+        int u = pq.top().second;
+        pq.pop();
+        inMST[u] = true;
+
+        for (auto &edge : graph[u]) {
+            int v = edge.first, weight = edge.second;
+            if (!inMST[v] && weight < minWeight[v]) {
+                minWeight[v] = weight;
+                pq.push({weight, v});
+            }
+        }
+    }
+
+    // 输出最小生成树的边权重
+    for (int i = 1; i < V; i++) {
+        cout << "0 -- " << i << " = " << minWeight[i] << endl;
+    }
+}
+                </code>
+            </pre>
+
+            <!-- 练习模块 -->
+            <div class="module">
+                <h3>练习</h3>
+                <ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <foot
